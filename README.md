@@ -13,7 +13,7 @@ Hospital management involves overseeing and coordinating various aspects of heal
 Ultimately, hospital management plays a vital role in achieving organizational goals, enhancing patient satisfaction, and improving overall healthcare outcomes.
 
 <p align ="center">
-<img src="Images/image1.png"/>
+<img src="images/img1.jpeg"/>
 </p>
 
 ## ER Model:
