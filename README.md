@@ -24,36 +24,43 @@ The structure of our database (in the form of an entity - relationship model) co
 
 
 
-* **7** entities 
-* **4** relationships.
+* **10** entities 
+* **8** relationships.
 
-**The entities (7):**
-
-
-
-* **Brand** - Each member of this entity class represents a brand / company name. Multiple products can ‘belong’ to a single brand.
-* **Category** - Each member of this entity class represents a specific product category. Multiple products in our inventory can fall into the same category. Categories can also have subcategories (a hierarchical structure can be made here).
-* **Product** - Represents the items we can stock up in our inventory. Attributes include the product name, description, maximum retail price, as well the quantity that we currently have in stock (+ reserved stock).
-* **Customer** - Each member corresponds to information about a customer. The attributes of this entity include the customer’s name, address & contact number + email address.
-* **Supplier** - Represents the organizations / companies that supply us with various products. Attributes include the supplier name, address, contact number & email address.
-* **Invoice** - Each member contains information about a particular order that we’ve made to a supplier. Some attributes: Invoice date, bill amount, quantity and status (whether the order has been fulfilled or not).
-* **Order** - Each member corresponds to information about a particular order that a customer has made to us. Attributes: Order date, amount, quantity and status (whether the order has been fulfilled or not).
-
-**The relationships (4):**
+**The entities (11):**
 
 
 
-* **Product-Brand** - Connects products to their respective brands (if they belong to one). We thought of including total participation from products here, but that may create trouble when documenting products that do not actually belong to a brand (or are unbranded). The relation is many-to-one, in the sense that multiple products can belong to the same brand.
-* **Product-Category** - Connects products to their respective product categories (if they belong to one). The relation is many-to-one, in the sense that multiple products can fall into the same category.
-* **Supplies** - This relation joins members of the Supplier, Product and Invoice entity classes, and is used to represent the overall transfer of inventory from suppliers to our storeroom. We create an invoice to purchase a specific quantity of a particular product at some fixed price from some supplier. All of this is captured through this relation. All invoice members partake in this relation - so there’s total participation.
-* **Orders** - This relation joins members of the Customer, Product and Order entity classes, and is used to represent the overall transfer of inventory from our storeroom to customers (consumers & other vendors). A customer places an order to buy a specific quantity of a particular product at some fixed price from our inventory. All of this is captured through this relation. All order members partake in this relation - so there’s total participation.
+* **Hospital** - Each member of this entity class represents a brand / company name. Multiple products can ‘belong’ to a single brand.
+* **Department** - Each member of this entity class represents a specific product category. Multiple products in our inventory can fall into the same category. Categories can also have subcategories (a hierarchical structure can be made here).
+* **Doctor** - Represents the items we can stock up in our inventory. Attributes include the product name, description, maximum retail price, as well the quantity that we currently have in stock (+ reserved stock).
+* **Patient** - Each member corresponds to information about a customer. The attributes of this entity include the customer’s name, address & contact number + email address.
+* **Bill** - Represents the organizations / companies that supply us with various products. Attributes include the supplier name, address, contact number & email address.
+* **Room** - Each member contains information about a particular order that we’ve made to a supplier. Some attributes: Invoice date, bill amount, quantity and status (whether the order has been fulfilled or not).
+* **Inpatient** - Each member corresponds to information about a particular order that a customer has made to us. Attributes: Order date, amount, quantity and status (whether the order has been fulfilled or not).
+* **Outpatient** - Each member corresponds to information about a particular order that a customer has made to us. Attributes: Order date, amount, quantity and status (whether the order has been fulfilled or not).
+* **Lab_Report** - Each member corresponds to information about a particular order that a customer has made to us. Attributes: Order date, amount, quantity and status (whether the order has been fulfilled or not).
+* **Nurse** - Each member corresponds to information about a particular order that a customer has made to us. Attributes: Order date, amount, quantity and status (whether the order has been fulfilled or not).
+
+**The relationships (8):**
+
+
+
+* **Consults** - Connects products to their respective brands (if they belong to one). We thought of including total participation from products here, but that may create trouble when documenting products that do not actually belong to a brand (or are unbranded). The relation is many-to-one, in the sense that multiple products can belong to the same brand.
+* **Goes_to** - Connects products to their respective product categories (if they belong to one). The relation is many-to-one, in the sense that multiple products can fall into the same category.
+* **Works_for** - This relation joins members of the Supplier, Product and Invoice entity classes, and is used to represent the overall transfer of inventory from suppliers to our storeroom. We create an invoice to purchase a specific quantity of a particular product at some fixed price from some supplier. All of this is captured through this relation. All invoice members partake in this relation - so there’s total participation.
+* **Checks** - This relation joins members of the Customer, Product and Order entity classes, and is used to represent the overall transfer of inventory from our storeroom to customers (consumers & other vendors). A customer places an order to buy a specific quantity of a particular product at some fixed price from our inventory. All of this is captured through this relation. All order members partake in this relation - so there’s total participation.
+* **Decides** - This relation joins members of the Customer, Product and Order entity classes, and is used to represent the overall transfer of inventory from our storeroom to customers (consumers & other vendors). A customer places an order to buy a specific quantity of a particular product at some fixed price from our inventory. All of this is captured through this relation. All order members partake in this relation - so there’s total participation.
+* **Admitted_to** - This relation joins members of the Customer, Product and Order entity classes, and is used to represent the overall transfer of inventory from our storeroom to customers (consumers & other vendors). A customer places an order to buy a specific quantity of a particular product at some fixed price from our inventory. All of this is captured through this relation. All order members partake in this relation - so there’s total participation.
+* **Issues** - This relation joins members of the Customer, Product and Order entity classes, and is used to represent the overall transfer of inventory from our storeroom to customers (consumers & other vendors). A customer places an order to buy a specific quantity of a particular product at some fixed price from our inventory. All of this is captured through this relation. All order members partake in this relation - so there’s total participation.
+* **Governs** - This relation joins members of the Customer, Product and Order entity classes, and is used to represent the overall transfer of inventory from our storeroom to customers (consumers & other vendors). A customer places an order to buy a specific quantity of a particular product at some fixed price from our inventory. All of this is captured through this relation. All order members partake in this relation - so there’s total participation.
 
 **The ER Diagram:**
 
 The resulting diagram:
 
 <p align ="center">
-<img src="Images/image2.png"/>
+<img src="images/img2.png"/>
 </p>
 
 ## Relational Model:
