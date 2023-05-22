@@ -77,8 +77,8 @@ Upon converting the previously mentioned Entity - Relationship diagram into a Re
 1.  Hospital (<span style="text-decoration:underline;">Hospital_Id</span>, Name, Address)
 2.  Department (<span style="text-decoration:underline;">Department_no</span>, Department_Name)
 3.  Doctor (<span style="text-decoration:underline;">Doctor_Id</span>, Doctor_Name, Sex, Dept_num, Hosp_id)
-4.  Patient (<span style="text-decoration:underline;">Patient_Id</span>, Disease, Sex, Patient_name, Doc_Id,Hos_Id)
-5.          4.1. Phone_no(<span style="text-decoration:underline;">Patnt_Id, Patnt_phone</span>) 
+4.  Patient (<span style="text-decoration:underline;">Patient_Id</span>, Disease, Sex, Patient_name, Doc_Id,Hos_Id) <br>
+         4.1. Phone_no(<span style="text-decoration:underline;">Patnt_Id, Patnt_phone</span>) <br>
 6.  Bill (<span style="text-decoration:underline;">Bill_no</span>, Bill_Charges, Patient_Type, Pat_Id, Pat_name)
 7.  Room (<span style="text-decoration:underline;">Room_no</span>, roomstatus)
 8.  Inpatient (<span style="text-decoration:underline;">IN_Id</span>, Doc_Id, R_no, Rept_Id, Date_of_adm, Date_of_dis, B_no)
