@@ -1,17 +1,16 @@
-# <p align="center">Inventory Management System</p> 
+# <p align="center">Hospital Management System</p> 
 
 ### <p align="center">IT202 - Database Management Systems Course Project</p>
 
 ### Contributors
 
-* Lakshya		(2K21/IT/101)
-* Harsh Sharma 		(2K21/IT/73)
+* Deepanshu Sharma	(2K21/IT/059)
+* Chirag Rana 		   (2K21/IT/056)
 
 ## Introduction:
 
-Inventory management, in our context, involves the tracking of inventory (a list of items or goods) from manufacturers to a storeroom. It also involves the tracking of inventory from this storeroom to various customers.
-
-To be more precise, we track invoices that are made by the storeroom to suppliers (manufacturers). We also keep tabs on orders that are made by customers to our storeroom. Payment information pertaining to these invoices and orders are also stored. Additionally, we maintain a well organized collection of products, along with the quantities that we currently have in stock. We also store relevant information about our customers and suppliers.
+Hospital management involves overseeing and coordinating various aspects of healthcare facilities, including administrative tasks, financial management, resource allocation, staff supervision, and strategic planning. It aims to ensure efficient operations, quality patient care, effective communication, and optimal utilization of resources within a hospital or healthcare organization.
+Ultimately, hospital management plays a vital role in achieving organizational goals, enhancing patient satisfaction, and improving overall healthcare outcomes.
 
 <p align ="center">
 <img src="Images/image1.png"/>
