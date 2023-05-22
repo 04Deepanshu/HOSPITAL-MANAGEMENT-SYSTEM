@@ -78,20 +78,21 @@ Upon converting the previously mentioned Entity - Relationship diagram into a Re
 2.  Department (<span style="text-decoration:underline;">Department_no</span>, Department_Name)
 3.  Doctor (<span style="text-decoration:underline;">Doctor_Id</span>, Doctor_Name, Sex, Dept_num, Hosp_id)
 4.  Patient (<span style="text-decoration:underline;">Patient_Id</span>, Disease, Sex, Patient_name, Doc_Id,Hos_Id)
-5.  Bill (<span style="text-decoration:underline;">Bill_no</span>, Bill_Charges, Patient_Type, Pat_Id, Pat_name)
-6.  Room (<span style="text-decoration:underline;">Room_no</span>, roomstatus)
-7.  Inpatient (<span style="text-decoration:underline;">IN_Id</span>, Doc_Id, R_no, Rept_Id, Date_of_adm, Date_of_dis, B_no)
-8.  Outpatient (<span style="text-decoration:underline;">OUT_Id</span>, Rept_Id, Doc_Id, B_no)
-9.  Lab_Report (<span style="text-decoration:underline;">Report_Id</span>, Doctr_Id, pat_Id, date_of_Issue)
-10. Nurse (<span style="text-decoration:underline;">Nurse_name, nurse_room</span>)
-**Tables constructed from the relationships (4):**
+    4.1. Phone_no(<span style="text-decoration:underline;">Patnt_Id, Patnt_phone</span>)
+6.  Bill (<span style="text-decoration:underline;">Bill_no</span>, Bill_Charges, Patient_Type, Pat_Id, Pat_name)
+7.  Room (<span style="text-decoration:underline;">Room_no</span>, roomstatus)
+8.  Inpatient (<span style="text-decoration:underline;">IN_Id</span>, Doc_Id, R_no, Rept_Id, Date_of_adm, Date_of_dis, B_no)
+9.  Outpatient (<span style="text-decoration:underline;">OUT_Id</span>, Rept_Id, Doc_Id, B_no)
+10. Lab_Report (<span style="text-decoration:underline;">Report_Id</span>, Doctr_Id, pat_Id, date_of_Issue)
+11. Nurse (<span style="text-decoration:underline;">Nurse_name, nurse_room</span>)
+
+
+**Tables constructed from the M-N relationships (4):**
 
 
 
-1. product_brand (<span style="text-decoration:underline;">product_id</span>, brand_id)
-2. product_category (<span style="text-decoration:underline;">product_id</span>, category_id)
-3. supplies (<span style="text-decoration:underline;">invoice_id</span>, supplier_id, product_id, price_per_unit, quantity)
-4. orders (<span style="text-decoration:underline;">order_id</span>, customer_id, product_id, price_per_unit, quantity)
+1. works_for (<span style="text-decoration:underline;">H_Id, D_no</span>, brand_id)
+
 
 ## Result of mapping the HOSPITAL MANAGEMENT ER schema into a relational database schema :
 
