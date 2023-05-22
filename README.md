@@ -6,6 +6,7 @@
 
 * Deepanshu Sharma	(2K21/IT/059)
 * Chirag Rana 		   (2K21/IT/056)
+* Daksh Gupta        (2K21/IT/057)  
 
 ## Introduction:
 
@@ -69,18 +70,20 @@ A relational model is a way of conceptually representing and managing data in a 
 
 Upon converting the previously mentioned Entity - Relationship diagram into a Relational Model, we obtain the following tables:
 
-**Tables constructed from the entities (7):**
+**Tables constructed from the entities (10):**
 
 
 
-1. brand (<span style="text-decoration:underline;">brand_id</span>, brand_name)
-2. category (<span style="text-decoration:underline;">category_id</span>, category_name, parent_id, depth)
-3. product (<span style="text-decoration:underline;">product_id</span>, product_name, description, mrp, selling_price, stock, reserved_stock)
-4. customer (<span style="text-decoration:underline;">customer_id</span>, name, address, contact_number, email)
-5. supplier (<span style="text-decoration:underline;">supplier_id</span>, name, address, contact_number, email)
-6. invoice (<span style="text-decoration:underline;">invoice_id</span>, invoice_date, quantity, bill_amount, status)
-7. customer_order (<span style="text-decoration:underline;">order_id</span>, order_date, amount, status)
-
+1.  Hospital (<span style="text-decoration:underline;">Hospital_Id</span>, Name, Address)
+2.  Department (<span style="text-decoration:underline;">Department_no</span>, Department_Name)
+3.  Doctor (<span style="text-decoration:underline;">Doctor_Id</span>, Doctor_Name, Sex, Dept_num, Hosp_id)
+4.  Patient (<span style="text-decoration:underline;">Patient_Id</span>, Disease, Sex, Patient_name, Doc_Id,Hos_Id)
+5.  Bill (<span style="text-decoration:underline;">Bill_no</span>, Bill_Charges, Patient_Type, Pat_Id, Pat_name)
+6.  Room (<span style="text-decoration:underline;">Room_no</span>, roomstatus)
+7.  Inpatient (<span style="text-decoration:underline;">IN_Id</span>, Doc_Id, R_no, Rept_Id, Date_of_adm, Date_of_dis, B_no)
+8.  Outpatient (<span style="text-decoration:underline;">OUT_Id</span>, Rept_Id, Doc_Id, B_no)
+9.  Lab_Report (<span style="text-decoration:underline;">Report_Id</span>, Doctr_Id, pat_Id, date_of_Issue)
+10. Nurse (<span style="text-decoration:underline;">Nurse_name, nurse_room</span>)
 **Tables constructed from the relationships (4):**
 
 
@@ -89,6 +92,9 @@ Upon converting the previously mentioned Entity - Relationship diagram into a Re
 2. product_category (<span style="text-decoration:underline;">product_id</span>, category_id)
 3. supplies (<span style="text-decoration:underline;">invoice_id</span>, supplier_id, product_id, price_per_unit, quantity)
 4. orders (<span style="text-decoration:underline;">order_id</span>, customer_id, product_id, price_per_unit, quantity)
+
+## Result of mapping the HOSPITAL MANAGEMENT ER schema into a relational database schema :
+
 
 ## Table Constraints:
 
