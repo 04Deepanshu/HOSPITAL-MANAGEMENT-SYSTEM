@@ -110,22 +110,21 @@ Below are the constraints that we impose on the constructed tables:
 1. **Hospital**: This table lists the names of various Hospitals in our inventory along with their Id's and Addresses. The Hospital_Id is the primary key, and clearly, the Name and Address column should never be left empty.
 
 ```sql
--- Table storing a list of brands of products.
-CREATE TABLE IF NOT EXISTS Hospital (
-   brand_id SERIAL PRIMARY KEY,
-   brand_name VARCHAR(50) NOT NULL
-);
+-- Table storing a list of Hospitals.
+create table Hospital(
+Name varchar(30) NOT NULL,
+Address varchar(100) NOT NULL,
+Hospital_Id varchar(9) primary key);
 ```
 
 
 2. **Department**: This table lists the various Departments of medicine in our inventory that may or may not be present in every Hospital. The Department_no is the primary key, and the Department_name column should never contain null values (defeats the purpose).
 
 ```sql
--- Table storing a list of various product categories.
-CREATE TABLE IF NOT EXISTS category (
-   category_id SERIAL PRIMARY KEY,
-   category_name VARCHAR(50) NOT NULL,
-   parent_id INT REFERENCES category(category_id)
+-- Table storing a list of Departments a hospital may have.
+create table Department(
+Department_no int primary key,
+Department_Name varchar(20) NOT NULL
 );
 ```
 
@@ -133,18 +132,15 @@ CREATE TABLE IF NOT EXISTS category (
 3. **Doctor**: This table lists the various Doctors in our inventory, and also a doctor works for a single Hospital. The Doctor_Id is the primary key, and the other attributes are Doctor_name, Sex, Dept_num(referenced with Department(Department_no)), Hosp_Id(referenced with Hospital(Hospital_Id)).
 
 ```sql
--- Table storing details about products in our inventory.
-CREATE TABLE IF NOT EXISTS product (
-   product_id SERIAL PRIMARY KEY,
-   product_name VARCHAR(50) NOT NULL,
-   description VARCHAR(200),
-   mrp NUMERIC(10, 2) NOT NULL CHECK (mrp > 0),
-   selling_price NUMERIC(10, 2) NOT NULL CHECK (
-       selling_price > 0 AND
-       selling_price <= mrp
-   ),
-   stock INT NOT NULL DEFAULT 0 CHECK (stock >= 0),
-   reserved_stock INT NOT NULL DEFAULT 0 CHECK (reserved_stock >= 0)
+-- Table storing a list of Doctors working for the hospitals.
+create table Doctor(
+Doctor_Name varchar(30) NOT NULL,
+sex varchar(1) NOT NULL,
+Dept_num int NOT NULL,
+Doctor_Id varchar(6) primary key,
+Hosp_Id varchar(9) NOT NULL,
+foreign key(Hosp_Id) references Hospital(Hospital_Id),
+foreign key(Dept_num) references Department(Department_no)
 );
 ```
 
@@ -152,27 +148,40 @@ CREATE TABLE IF NOT EXISTS product (
 4. **Patient**: This table contains details about Patients, including their name, Disease, Sex, phone number (which has to be a valid phone number - we’ve implemented a CHECK to handle this suitably), Doc_Id(referenced with Department(Department_no)), Hos_Id(referenced with Hospital(Hospital_Id)). Each Patient is assigned a unique id i.e, Patient_Id which is used as the primary key in this table.
 
 ```sql
--- Table storing details about our customers.
-CREATE TABLE IF NOT EXISTS customer (
-   customer_id SERIAL PRIMARY KEY,
-   name VARCHAR(50) NOT NULL,
-   address VARCHAR(200) NOT NULL,
-   contact_number CHAR(10) NOT NULL CHECK (contact_number NOT LIKE '%[^0-9]%'),
-   email VARCHAR(30) NOT NULL CHECK (email LIKE '%_@__%.__%')
+-- Table storing a list of Patients admitted to the hospital.
+create table Patient(
+Patient_Name varchar(30),
+Disease varchar(20),
+Sex varchar(1),
+Doc_Id varchar(6),
+Hos_Id varchar(9),
+Patient_Id varchar(6) primary key,
+foreign key(Doc_Id) references Doctor(Doctor_Id),
+foreign key(Hos_Id) references Hospital(Hospital_Id)
 );
 ```
-
+<br>
+        4.1 **Phone no**: This table contact details of Patients. Being multivalued, we make a separate table whose Patient Id(Patnt_Id) references Patient(Patient_Id). The patient Id and phone number together forms primary key.
+```sql        
+-- Table to store contact details of the patient.
+create table phone_no(
+Patnt_Id varchar(6),
+Patnt_phone varchar(10) (patnt_phone NOT LIKE '%[^0-9]%'),
+foreign key(Patnt_Id) references Patient(Patient_Id),
+primary key(Patnt_Id,Patnt_phone)
+);
+```
 
 5. **Bill**: This table contains details about the patient, including their name, Id and type along with the bill charges. Each Bill is assigned a unique id i.e, Bill_no, which is the primary key here.
 
 ```sql
--- Table storing details about our suppliers.
-CREATE TABLE IF NOT EXISTS supplier (
-   supplier_id SERIAL PRIMARY KEY,
-   name VARCHAR(50) NOT NULL,
-   address VARCHAR(200) NOT NULL,
-   contact_number CHAR(10) NOT NULL CHECK (contact_number NOT LIKE '%[^0-9]%'),
-   email VARCHAR(30) NOT NULL CHECK (email LIKE '%_@__%.__%')
+-- Table storing the financial details of the patient.
+create table Bill(
+Bill_Charges float,
+Patient_Type varchar(10),
+Bill_no int primary key,
+Pat_Id varchar(6),
+Pat_name varchar(30)
 );
 ```
 
@@ -180,84 +189,66 @@ CREATE TABLE IF NOT EXISTS supplier (
 6. **Room**: This table contains details regarding the rooms in the hospital. A unique id is assigned to each room i.e, room_no(the primary key). We also get to know the current status of the room (i.e. whether the room is vacant / occupied). Relevant constraints have been added.
 
 ```sql
--- Table storing details about our invoices to suppliers.
-CREATE TABLE IF NOT EXISTS invoice (
-   invoice_id SERIAL PRIMARY KEY,
-   invoice_date TIMESTAMP NOT NULL DEFAULT NOW(),
-   quantity INT NOT NULL CHECK (quantity > 0),
-   bill_amount NUMERIC(10, 2) NOT NULL CHECK (bill_amount > 0),
-   status VARCHAR(50) NOT NULL DEFAULT 'NOT PAID' CHECK (
-       status = 'PAID' OR
-       status = 'NOT PAID' OR
-       status = 'CANCELLED'
-   )
+-- Table storing a list of rooms in hospital.
+create table Room( 
+Room_no varchar(5) primary key,
+roomstatus varchar(6) NOT NULL
 );
 ```
 
 7. **Inpatient**: Similar to the *Patient* table, this table contains details about the Patients that are admitted to the hospital (and stays within the hospital) that includes room number(R_no referenced to Room(Room_no)), Doctor Id(Doc_Id referenced to Doctor(Doctor_Id)), report id(Rept_Id referenced to Lab_Report(Report_Id)), date of admission, date of discharge and Bill no(B_no referenced to Bill(Bill_no)). Each Inpatient is given a unique value (IN_id is the primary key) that is referenced to the Patient_Id. 
 
 ```sql
--- Table storing details about our customers' orders.
-CREATE TABLE IF NOT EXISTS customer_order (
-   order_id SERIAL PRIMARY KEY,
-   order_date TIMESTAMP NOT NULL DEFAULT NOW(),
-   amount NUMERIC(10, 2) NOT NULL CHECK (amount > 0),
-   quantity INT NOT NULL CHECK (quantity > 0),
-   status VARCHAR(50) NOT NULL DEFAULT 'NOT PAID' CHECK (
-       status = 'PAID' OR
-       status = 'NOT PAID' OR
-       status = 'CANCELLED'
-   )
+-- Table storing a list of Inatients in the hospital.
+create table Inpatient(
+IN_Id varchar(6) primary key,
+Doc_Id varchar(6),
+R_no varchar(5),
+Rept_Id  varchar(10),
+Date_of_adm date,
+Date_of_dis date,
+B_no int,
+foreign key(R_no) references Room(Room_no),
+foreign key(Rept_Id) references Lab_Report(Report_Id),
+foreign key(B_no) references Bill(Bill_no)
 );
 ```
 
 8. **Outpatient**: Similar to the *Patient* table, this table contains details about the Patients that are admitted to the hospital (and do not stay within the hospital) that includes Doctor Id(Doc_Id referenced to Doctor(Doctor_Id)), report id(Rept_Id referenced to Lab_Report(Report_Id)) and Bill no(B_no referenced to Bill(Bill_no)). Each Outpatient is given a unique value (OUT_id is the primary key) that is referenced to the Patient_Id. 
 
 ```sql
--- Table storing details about our customers' orders.
-CREATE TABLE IF NOT EXISTS customer_order (
-   order_id SERIAL PRIMARY KEY,
-   order_date TIMESTAMP NOT NULL DEFAULT NOW(),
-   amount NUMERIC(10, 2) NOT NULL CHECK (amount > 0),
-   quantity INT NOT NULL CHECK (quantity > 0),
-   status VARCHAR(50) NOT NULL DEFAULT 'NOT PAID' CHECK (
-       status = 'PAID' OR
-       status = 'NOT PAID' OR
-       status = 'CANCELLED'
-   )
+-- Table storing a list of Outpatients in the hospital.
+create table Outpatient(
+OUT_Id varchar(6) primary key,
+Doc_Id varchar(6),
+Rept_Id  varchar(10),
+B_no int,
+foreign key(B_no) references Bill(Bill_no), 
+foreign key(Rept_Id) references Lab_Report(Report_Id)
 );
 ```
 
 9. **Lab_Report**: This table contains details about the medical conditions of the Patient. Each Lab report is given a unique value (Report_Id is the primary key). It also contains the Doctor Id(Doctr_Id referenced to Doctor(Doctor_Id)), Patient Id(pat_Id referenced to Patient(Patient_Id)) and the date of issue of the report.
 
 ```sql
--- Table storing details about our customers' orders.
-CREATE TABLE IF NOT EXISTS customer_order (
-   order_id SERIAL PRIMARY KEY,
-   order_date TIMESTAMP NOT NULL DEFAULT NOW(),
-   amount NUMERIC(10, 2) NOT NULL CHECK (amount > 0),
-   quantity INT NOT NULL CHECK (quantity > 0),
-   status VARCHAR(50) NOT NULL DEFAULT 'NOT PAID' CHECK (
-       status = 'PAID' OR
-       status = 'NOT PAID' OR
-       status = 'CANCELLED'
-   )
+-- Table storing details of medical reports of the patient.
+create table Lab_Report(
+Doctr_Id varchar(6),
+Report_Id varchar(10) primary key,
+pat_Id varchar(6),
+date_of_issue date,
+foreign key(Doctr_Id) references Doctor(Doctor_Id)
 );
 ```
 
 10. **Nurse**: This table contains details about the Nurse that includes the Name of the nurse and the room she governs. 
 ```sql
--- Table storing details about our customers' orders.
-CREATE TABLE IF NOT EXISTS customer_order (
-   order_id SERIAL PRIMARY KEY,
-   order_date TIMESTAMP NOT NULL DEFAULT NOW(),
-   amount NUMERIC(10, 2) NOT NULL CHECK (amount > 0),
-   quantity INT NOT NULL CHECK (quantity > 0),
-   status VARCHAR(50) NOT NULL DEFAULT 'NOT PAID' CHECK (
-       status = 'PAID' OR
-       status = 'NOT PAID' OR
-       status = 'CANCELLED'
-   )
+-- Table storing a list of nurse in the hospital.
+create table Nurse(
+Nurse_name varchar(30),
+nurse_room varchar(5),
+primary key(Nurse_name,nurse_room),
+foreign key(nurse_room) references Room(Room_no)
 );
 ```
 
@@ -269,10 +260,12 @@ CREATE TABLE IF NOT EXISTS customer_order (
 1. **works_for**: This table relates Hospitals to their respective Doctors, and contains mappings from H_Id to D_no. Since the relationship is many to many, we make H_Id and D_no together as the primary key and reference them with Hospital(Hospital_Id) and Department(Department_no) respectively. Both attributes are also foreign keys.
 
 ```sql
--- Table relating products to their respective brands (if they exist).
-CREATE TABLE IF NOT EXISTS product_brand (
-   product_id INT PRIMARY KEY REFERENCES product(product_id),
-   brand_id INT NOT NULL REFERENCES brand(brand_id)
+-- Table to denote many to many Department 'works_for' hospital Relationship.
+create table works_for(
+H_Id varchar(9),
+D_no int,
+foreign key(D_no) references Department(Department_no),
+foreign key(H_Id) references Hospital(Hospital_Id),
+Primary key(H_ID,D_no)
 );
 ```
-
