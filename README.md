@@ -173,7 +173,7 @@ foreign key(Patnt_Id) references Patient(Patient_Id),
 primary key(Patnt_Id,Patnt_phone)
 );
 ```
-
+<br>
 
 5. **Bill**: This table contains details about the patient, including their name, Id and type along with the bill charges. Each Bill is assigned a unique id i.e, Bill_no, which is the primary key here.
 
