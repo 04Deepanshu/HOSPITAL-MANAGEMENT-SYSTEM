@@ -103,7 +103,7 @@ Primary key(H_ID,D_no)
 -- Table to store contact details of the patient.
 create table phone_no(
 Patnt_Id varchar(6),
-Patnt_phone varchar(10) (patnt_phone NOT LIKE '%[^0-9]%'),
+Patnt_phone varchar(10) NOT NULL CHECK (patnt_phone NOT LIKE '%[^0-9]%'),
 foreign key(Patnt_Id) references Patient(Patient_Id),
 primary key(Patnt_Id,Patnt_phone)
 );
