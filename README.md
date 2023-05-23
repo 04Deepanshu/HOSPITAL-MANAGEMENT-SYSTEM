@@ -162,7 +162,7 @@ foreign key(Hos_Id) references Hospital(Hospital_Id)
 ```
 
 <br>
- **Phone no** : This table contact details of Patients. Being multivalued, we make a separate table whose Patient Id(Patnt_Id) references Patient(Patient_Id). The patient Id and phone number together forms primary key.
+**Phone no** : This table contact details of Patients. Being multivalued, we make a separate table whose Patient Id(Patnt_Id) references Patient(Patient_Id). The patient Id and phone number together forms primary key.
  <br>
  
 ```sql        
