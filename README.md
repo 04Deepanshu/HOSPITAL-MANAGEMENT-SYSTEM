@@ -160,8 +160,9 @@ foreign key(Doc_Id) references Doctor(Doctor_Id),
 foreign key(Hos_Id) references Hospital(Hospital_Id)
 );
 ```
+
 <br>
- **Phone no**: This table contact details of Patients. Being multivalued, we make a separate table whose Patient Id(Patnt_Id) references Patient(Patient_Id). The patient Id and phone number together forms primary key.
+ **Phone no** : This table contact details of Patients. Being multivalued, we make a separate table whose Patient Id(Patnt_Id) references Patient(Patient_Id). The patient Id and phone number together forms primary key.
  <br>
  
 ```sql        
@@ -173,6 +174,7 @@ foreign key(Patnt_Id) references Patient(Patient_Id),
 primary key(Patnt_Id,Patnt_phone)
 );
 ```
+
 
 5. **Bill**: This table contains details about the patient, including their name, Id and type along with the bill charges. Each Bill is assigned a unique id i.e, Bill_no, which is the primary key here.
 
@@ -198,6 +200,7 @@ roomstatus varchar(6) NOT NULL
 );
 ```
 
+
 7. **Inpatient**: Similar to the *Patient* table, this table contains details about the Patients that are admitted to the hospital (and stays within the hospital) that includes room number(R_no referenced to Room(Room_no)), Doctor Id(Doc_Id referenced to Doctor(Doctor_Id)), report id(Rept_Id referenced to Lab_Report(Report_Id)), date of admission, date of discharge and Bill no(B_no referenced to Bill(Bill_no)). Each Inpatient is given a unique value (IN_id is the primary key) that is referenced to the Patient_Id. 
 
 ```sql
@@ -216,6 +219,7 @@ foreign key(B_no) references Bill(Bill_no)
 );
 ```
 
+
 8. **Outpatient**: Similar to the *Patient* table, this table contains details about the Patients that are admitted to the hospital (and do not stay within the hospital) that includes Doctor Id(Doc_Id referenced to Doctor(Doctor_Id)), report id(Rept_Id referenced to Lab_Report(Report_Id)) and Bill no(B_no referenced to Bill(Bill_no)). Each Outpatient is given a unique value (OUT_id is the primary key) that is referenced to the Patient_Id. 
 
 ```sql
@@ -230,6 +234,7 @@ foreign key(Rept_Id) references Lab_Report(Report_Id)
 );
 ```
 
+
 9. **Lab_Report**: This table contains details about the medical conditions of the Patient. Each Lab report is given a unique value (Report_Id is the primary key). It also contains the Doctor Id(Doctr_Id referenced to Doctor(Doctor_Id)), Patient Id(pat_Id referenced to Patient(Patient_Id)) and the date of issue of the report.
 
 ```sql
@@ -242,6 +247,7 @@ date_of_issue date,
 foreign key(Doctr_Id) references Doctor(Doctor_Id)
 );
 ```
+
 
 10. **Nurse**: This table contains details about the Nurse that includes the Name of the nurse and the room she governs. 
 ```sql
@@ -256,7 +262,6 @@ foreign key(nurse_room) references Room(Room_no)
 
 
 **Constraints on tables constructed from the relationships (4):**
-
 
 
 1. **works_for**: This table relates Hospitals to their respective Doctors, and contains mappings from H_Id to D_no. Since the relationship is many to many, we make H_Id and D_no together as the primary key and reference them with Hospital(Hospital_Id) and Department(Department_no) respectively. Both attributes are also foreign keys.
