@@ -17,7 +17,7 @@ Ultimately, hospital management plays a vital role in achieving organizational g
 
 <p align ="center">
 <img src="images/img1.png"/>
-</p>
+</p> 
 
 ## ER Model:
 
@@ -95,6 +95,10 @@ Upon converting the previously mentioned Entity - Relationship diagram into a Re
 
 
 ## Result of mapping the HOSPITAL MANAGEMENT ER schema into a relational database schema :
+
+<p align ="center">
+<img src="images/img3.png"/>
+</p>
 
 
 ## Table Constraints:
